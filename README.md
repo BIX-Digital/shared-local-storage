@@ -8,7 +8,7 @@ To use it the page where you include the script also needs to include an `iframe
 
 ## What problem does this solve
 
-Local storage access in Browsers is limited to the same origin (origin = protocol + (sub)domain + port). This is for security reasons and make sense, but sometimes you may actually be able to share some information across your sub-domains.
+Local storage access in Browsers is limited to the same origin (origin = protocol + (sub)domain + port). This is for security reasons and make sense, but sometimes you may actually want to be able to share some information across your sub-domains.
 
 The way how this script achieves this is to embed one page on the "main" domain via `<iframe>`. This embedded page contains code to listen to messages sent by the **Shared Local Storage Client** and answers them. This way the embedding page can access the local storage of the embedded page.
 
@@ -38,10 +38,10 @@ As the page that opens with the `npm run test` command also states the output of
 |-|-|
 | `.\index.html` | the example plage that also contains the test button |
 | `.\css\primitive.css` | default styles used in the example page; not really needed |
-| `.\js\slsc.js` | the Shared Storage Client code |
+| `.\js\slsc.js` | the Shared Local Storage Client code |
 | `.\js\scripts.js` | the demo-code; showing how to wire up things and containing the test code |
-| `.\store\index.html` | example Shared Storage Host usage |
-| `.\store\slsh.js` | the actual Shared Storage Host code |
+| `.\store\index.html` | example Shared Local Storage Host usage |
+| `.\store\slsh.js` | the actual Shared Local Storage Host code |
 
 ## Your custom setup
 
@@ -49,7 +49,7 @@ As the page that opens with the `npm run test` command also states the output of
 
 Make sure that the `slsh.js` is part of a simple website you can easily embed in a hidden `iframe`. To avoid any crazy loading times and overhead it's recommended to have one dedicated `html` file that has next to no content beside the *Shared Storage Host*. It's up to you if you want to do this in a subdirectory or an a separate subdomain of your system.
 
-Before you publish the `ssh.js` make sure you add all origins that should be able to work with it to the `allowedOrigins` array. By default it contains only one element: `http://127.0.0.1:8080`.  
+Before you publish the `slsh.js` make sure you add all origins that should be able to work with it to the `allowedOrigins` array. By default it contains only one element: `http://127.0.0.1:8080`.  
 You have to adjust it to all origins you embed this in. And if you also just have one origin in there you should maybe consider to use native localStorage directly... ;-)
 
 ### Install the client
