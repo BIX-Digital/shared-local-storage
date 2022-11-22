@@ -1,0 +1,15 @@
+{
+  "name": "shared-local-storage",
+  "version": "0.1.0",
+  "description": "A method to have a local storage across origins",
+  "scripts": {
+    "test": "npx http-server -o",
+    "gen-doc": "jsdoc README.md js/slsc.js store/slsh.js --destination docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BIX-Digital/shared-local-storage.git"
+  },
+  "author": "Manuel Feller",
+  "license": "MIT"
+}

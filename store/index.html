@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Shared Storage Host</title>
+  </head>
+  <body>
+    <div id="loadIndicator">loading, please wait...</div>
+    <!--
+      The following way dynamically loads the script if the conditions we want to check for are met.
+      This way we do not even load or execute if the page is called directly.
+      You could add some checks that the embedding page is from a valid domain as an additional security measure,
+      but the script itself already has a whitelist from what origins it accepts messages / requests.
+    -->
+    <script>
+      // promise based dynamic loader for more javascript files
+      const loadScript = src => {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.onload = resolve;
+          script.onerror = reject;
+          script.src = src;
+          document.head.append(script);
+        })
+      }
+      function pageHasValidParent() {
+        // Possibility: maybe check the allowed origins as parent here directly and only load in case it is a valid one
+        return (window.location !== window.parent.location) ? true : false;
+      }
+      // make sure that the shared storage is only loaded when page is embedded (from same origin)
+      if (pageHasValidParent()) {
+        loadScript('http://127.0.0.1:8080/store/slsh.js')
+          .then(() => {
+            document.getElementById('loadIndicator').innerHTML = 'Shared Storage Host ready to use...';
+          })
+          .catch(() => console.error('Loading the Shared Storage Host script failed...'));
+      } else {
+        document.getElementById('loadIndicator').innerHTML = 'Invalid use, this page is a component that can not be opened directly...';
+      }
+    </script>
+    <!--
+      You could also load the host script directly here with a simple <script src="slsh.js" /> if you want; as this is normally loaded
+      in a hidden iframe user feedback is not really needed - just remember that tech savvy curious users may want to know what this is...
+    -->
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Tab App</title>
+
+  <link rel="stylesheet" href="css/primitive.css">
+</head>
+
+<body>
+
+  <div class="small-container">
+    <h1>Shared Storage Usage Demo</h1>
+    <p><strong>Test output is in the developer console</strong></p>
+    <button id="msg">execute "e2e" tests</button>
+  </div>
+
+  <!-- include the shared storage host -->
+  <iframe id="sharedStorage" src="http://127.0.0.1:8080/store/index.html" height="150" width="150"></iframe>
+  <!-- include the script file with the shared storage client script -->
+  <script src="js/slsc.js"></script>
+  <!-- include the script that uses the shared storage client -->
+  <script src="js/scripts.js"></script>
+
+</body>
+
+</html>
